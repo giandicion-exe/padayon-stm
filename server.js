@@ -96,7 +96,6 @@ function requireAdmin(req, res, next) {
   next();
 }
 
-// Serve app.js dynamically
 app.get('/app.js', (req, res) => {
   res.setHeader('Content-Type', 'application/javascript');
   res.send(`
@@ -394,7 +393,6 @@ function initListeners() {
   `);
 });
 
-// Routes
 app.get('/', (req, res) => {
   if (req.isAuthenticated && req.isAuthenticated()) {
     res.redirect('/dashboard');
@@ -411,7 +409,6 @@ app.get('/signup', (req, res) => {
   res.render('signup', { error: null });
 });
 
-// Google OAuth routes
 app.get('/auth/google',
   passport.authenticate('google', { scope: ['profile', 'email'] })
 );
