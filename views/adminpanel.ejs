@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PADAYON | AdminPanel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FAF6F0;
+      --card: #F3EBE0;
+      --text: #4A3728;
+      --muted: #8a7565;
+      --accent: #C4704F;
+      --accent2: #8FA98A;
+      --line: #e2d6c6;
+      --shadow: 0 6px 20px rgba(74, 55, 40, .10);
+    }
+
+    [data-theme=dark] {
+      --bg: #2A2320;
+      --card: #362D28;
+      --text: #F3E9DC;
+      --muted: #b9a793;
+      --accent: #E0906E;
+      --accent2: #9DB898;
+      --line: #4b3f38;
+      --shadow: 0 6px 20px rgba(0, 0, 0, .35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Nunito', 'Quicksand', system-ui, sans-serif;
+      line-height: 1.5;
+      transition: background .3s, color .3s;
+    }
+
+    h1,
+    h2 {
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 1.6rem;
+      font-weight: 800;
+    }
+
+    h2 {
+      font-size: 1.15rem;
+      margin-bottom: .6rem;
+    }
+
+    #app {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .tag {
+      margin: 0;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 22px;
+      padding: 20px;
+      margin: 16px 0;
+      box-shadow: var(--shadow);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .stat-box {
+      background: var(--bg);
+      border-radius: 16px;
+      padding: 16px;
+      border: 2px solid var(--line);
+    }
+
+    .stat-value {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .btn {
+      min-height: 44px;
+      padding: 8px 18px;
+      border: 2px solid var(--line);
+      border-radius: 999px;
+      background: var(--bg);
+      color: var(--text);
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      transition: transform .15s, background .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .list {
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 0;
+    }
+
+    .list li {
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: var(--bg);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      border: 1px solid var(--line);
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .badge {
+      background: var(--accent2);
+      color: #1f2a1d;
+      padding: 2px 12px;
+      border-radius: 999px;
+      font-size: .8rem;
+      font-weight: 800;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <header>
+      <div>
+        <h1>PADAYON</h1>
+        <p class="tag">Admin Panel</p>
+      </div>
+      <div class="controls">
+        <a href="/dashboard" class="btn">Dashboard</a>
+        <button class="btn" id="themeBtn">Night</button>
+        <a href="/logout" class="btn">Sign out</a>
+      </div>
+    </header>
+
+    <p class="note" style="margin-top: 12px;">Signed in as admin: <%= typeof email !=='undefined' ? email : '' %>
+    </p>
+
+    <main>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <p class="note">Total Users</p>
+          <div class="stat-value">
+            <%= users.length %>
+          </div>
+        </div>
+        <div class="stat-box">
+          <p class="note">Active Sessions Now</p>
+          <div class="stat-value">
+            <%= typeof activeSessionsCount !=='undefined' ? activeSessionsCount : 0 %>
+          </div>
+        </div>
+      </div>
+
+      <section class="card">
+        <h2>Registered User Directory</h2>
+        <p class="note">Detailed overview of account creation dates and recent activity.</p>
+        <ul class="list">
+          <% if (users && users.length> 0) { %>
+            <% users.forEach((u, i)=> { %>
+              <li>
+                <div>
+                  <strong>
+                    <%= i + 1 %>.
+                  </strong>
+                  <%= u.email %>
+                    <% if (u.email===email) { %>
+                      <span class="badge">You</span>
+                      <% } %>
+                        <br>
+                        <span class="note">
+                          Registered: <%= u.createdAt ? new Date(u.createdAt).toLocaleString() : 'Unknown' %> |
+                            Last Active: <%= u.lastActive ? new Date(u.lastActive).toLocaleString() : 'Never' %>
+                        </span>
+                </div>
+              </li>
+              <% }) %>
+                <% } else { %>
+                  <li>No users found.</li>
+                  <% } %>
+        </ul>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const $ = s => document.querySelector(s);
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('padayon_theme');
+      const themeBtn = $('#themeBtn');
+      if (savedTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        if (themeBtn) themeBtn.textContent = '☀️ Day';
+      } else {
+        if (themeBtn) themeBtn.textContent = '🌙 Night';
+      }
+
+      if (themeBtn) {
+        themeBtn.onclick = () => {
+          const currentTheme = document.documentElement.getAttribute('data-theme');
+          const isDark = currentTheme === 'dark';
+          if (isDark) {
+            document.documentElement.removeAttribute('data-theme');
+            themeBtn.textContent = '🌙 Night';
+            localStorage.setItem('padayon_theme', 'light');
+          } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeBtn.textContent = '☀️ Day';
+            localStorage.setItem('padayon_theme', 'dark');
+          }
+        };
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PADAYON | Signup</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+<style>:root{
+    --bg:#FAF6F0;
+    --card:#F3EBE0;
+    --text:#4A3728;
+    --muted:#8a7565;
+    --accent:#C4704F;
+    --accent2:#8FA98A;
+    --line:#e2d6c6;
+    --shadow:0 6px 20px rgba(74,55,40,.10)}
+[data-theme=dark]{
+    --bg:#2A2320;
+    --card:#362D28;
+    --text:#F3E9DC;
+    --muted:#b9a793;
+    --accent:#E0906E;
+    --accent2:#9DB898;
+    --line:#4b3f38;
+    --shadow:0 6px 20px rgba(0,0,0,.35)}
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Nunito','Quicksand',system-ui,sans-serif;line-height:1.5;transition:background .3s,color .3s}
+
+h1,h2{
+    margin:0}
+
+h1{
+    font-size:1.6rem;
+    font-weight:800}
+
+h2{
+    font-size:1.15rem;
+    margin-bottom:.6rem}
+
+#app{
+    max-width:680px;
+    margin:0 auto;
+    padding:16px}
+
+header{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    justify-content:space-between;
+    align-items:center}
+
+.controls{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center}
+
+.tag{
+    margin:0;
+    color:var(--muted);
+    font-size:.9rem}
+.quote{
+    text-align:center;
+    font-style:italic;
+    color:var(--accent);
+    margin:18px 0 4px;
+    font-weight:700}
+
+.who{
+    text-align:center;
+    color:var(--muted);
+    font-size:.8rem;
+    margin:0 0 12px}
+
+.center{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:16px}
+
+.login-card{
+    text-align:center;
+    max-width:380px;
+    width:100%}
+
+#gbtn{
+    display:flex;
+    justify-content:center;
+    margin-top:12px;
+    text-decoration:none;
+    align-items:center;
+}
+
+.card{
+    background:var(--card);
+    border-radius:22px;
+    padding:20px;
+    margin:16px 0;
+    box-shadow:var(--shadow)}
+
+label{
+    display:block;
+    font-weight:700;
+    font-size:.9rem;
+    margin-top:10px}
+
+input,textarea{
+    width:100%;
+    min-height:44px;
+    margin-top:4px;
+    padding:10px 14px;
+    border:2px solid var(--line);
+    border-radius:14px;
+    background:var(--bg);
+    color:var(--text);
+    font:inherit;
+    resize: none;
+}
+
+input:focus,textarea:focus,.btn:focus-visible,summary:focus-visible{outline:3px solid var(--accent);
+    outline-offset:2px}
+
+fieldset{
+    border:0;
+    padding:0;
+    margin:0}
+
+fieldset:disabled{opacity:.45}
+
+.grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px}
+
+@media(max-width:480px){
+    .grid2{grid-template-columns:1fr}}
+
+.btn{
+    min-height:44px;
+    padding:8px 18px;
+    border:2px solid var(--line);
+    border-radius:999px;
+    background:var(--bg);
+    color:var(--text);
+    font:inherit;
+    font-weight:700;
+    cursor:pointer;
+    transition:transform .15s,background .2s}
+.btn:hover:not(:disabled){transform:translateY(-2px)}
+
+.btn:disabled{opacity:.4;cursor:not-allowed}
+
+.btn.primary{
+    background:var(--accent);
+    border-color:var(--accent);
+    color:#fff}
+
+.row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:center;
+    margin:8px 0}
+
+.note{
+    color:var(--muted);
+    font-size:.85rem}
+
+.err{
+    color:#c0392b;
+    font-weight:700;
+    min-height:1.2em;
+    margin:6px 0}
+    
+.pill{
+    display:inline-block;
+    padding:2px 12px;
+    border-radius:999px;
+    background:var(--accent2);
+    color:#1f2a1d;
+    font-size:.8rem;
+    font-weight:700;
+    margin:2px 4px 2px 0}
+
+.pill button{
+    border:0;
+    background:none;
+    cursor:pointer;
+    font-weight:800;
+    color:inherit;
+    min-width:24px}
+
+.switch{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-weight:700;
+    cursor:pointer;
+    margin:0;
+    min-height:44px}
+
+.switch input{
+    width:20px;
+    min-height:20px;
+    margin:0;
+    accent-color:var(--accent)}
+
+.how{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:center;
+    list-style:none;
+    padding:0;
+    margin:0;
+    color:var(--muted);
+    font-weight:700;
+    font-size:.9rem}
+
+.focus-card{
+    border:3px solid var(--accent);
+    animation:glow 3s ease-in-out infinite;
+    text-align:center;
+    padding:28px 20px}
+
+.focus-card h2{
+    font-size:1.6rem;
+    margin:10px 0}
+
+.badge{
+    background:var(--accent);
+    color:#fff;
+    padding:4px 14px;
+    border-radius:999px;
+    font-size:.8rem;
+    font-weight:800}
+
+.empty{
+    font-size:2.4rem}
+
+@keyframes glow{50%{box-shadow:0 0 28px rgba(196,112,79,.45)}}
+
+@keyframes slide{from{opacity:0;transform:translateY(-16px)}}
+
+.slide{animation:slide .4s ease}
+
+.list{
+    list-style:none;
+    padding:0;
+    margin:8px 0 0}
+
+.list li{
+    padding:10px 14px;
+    border-radius:14px;
+    background:var(--bg);
+    margin-bottom:8px;
+    opacity:.75}
+
+summary{
+    cursor:pointer;
+    font-weight:800;
+    min-height:44px}
+
+dialog{
+    border:0;
+    border-radius:22px;
+    background:var(--card);
+    color:var(--text);
+    max-width:420px;
+    width:90%;
+    padding:22px;
+    box-shadow:var(--shadow)}
+
+dialog::backdrop{background:rgba(0,0,0,.4)}
+
+.spark{
+    position:fixed;
+    font-size:1.6rem;
+    pointer-events:none;
+    animation:up 1.1s ease-out forwards}
+
+@keyframes up{to{transform:translateY(-140px) rotate(40deg);opacity:0}}
+
+#app.focus #upnext,#app.focus #hist,#app.focus #how{display:none}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+[hidden]{display:none!important}</style>
+</head>
+<body>
+
+<section id="login" class="center">
+  <div class="card login-card">
+    <h1>PADAYON</h1>
+    <p class="tag">A Smart Task Manager</p>
+    <div class="row" style="justify-content:center">
+      <a href="/login" class="btn" id="tabLogin" type="button">Log in</a>
+      <a href="/signup" class="btn primary" id="tabSignup" type="button">Sign up</a>
+    </div>
+    <form id="authForm" action="/api/signup" method="POST" novalidate style="text-align:left">
+      <label>Email<input id="aEmail" name="email" type="email" autocomplete="email" placeholder="you@example.com" required></label>
+      <label>Password (at least 6 characters)<input id="aPass" name="password" type="password" autocomplete="new-password" required></label>
+      <label>Confirm Password<input id="aPassConfirm" name="confirmPassword" type="password" autocomplete="new-password" required></label>
+      
+      <!-- Show Password Checkbox -->
+      <label class="switch" style="margin-top: 12px;">
+        <input type="checkbox" id="showPassToggle">
+        <span>Show passwords</span>
+      </label>
+
+      <% if (typeof error !== 'undefined' && error) { %>
+        <p id="loginErr" class="err" role="alert"><%= error %></p>
+      <% } else { %>
+        <p id="loginErr" class="err" role="alert"></p>
+      <% } %>
+      <button class="btn primary" id="authBtn" type="submit" style="width:100%">Sign up</button>
+    </form>
+    <a href="/auth/google" class="btn" id="gbtn" style="width:100%">Sign up with Google</a>
+  </div>
+</section>
+
+<script>
+  const showPassToggle = document.getElementById('showPassToggle');
+  const aPass = document.getElementById('aPass');
+  const aPassConfirm = document.getElementById('aPassConfirm');
+
+  if (showPassToggle) {
+    showPassToggle.addEventListener('change', () => {
+      const type = showPassToggle.checked ? 'text' : 'password';
+      aPass.type = type;
+      aPassConfirm.type = type;
+    });
+  }
+</script>
+
+</body>
+</html>
